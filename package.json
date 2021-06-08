@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/JohnBanas/social_network_api#readme",
   "dependencies": {
+    "date-utils-2020": "^1.0.1",
     "express": "^4.17.1",
     "mongoose": "^5.12.13",
     "mongoose-type-email": "^1.1.2"
