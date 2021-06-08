@@ -3,6 +3,36 @@ const { Schema, model } = require('mongoose');
 const { formatDate } = require('date-utils-2020');
 
 
+//reaction schema
+const ReactionSchema = new Schema({
+  //set custom id to avoid confusion with parent id (comment _id)
+  reactionId: {
+    type: Schema.Types.ObjectId,
+    default: () => new Types.ObjectId()
+  },
+  reactionBody: {
+    type: String,
+    required: 'Please leave a reaction!',
+    maxLength: 280
+  },
+  username: {
+    type: String,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    get: (createdAtVal) => formatDate(createdAtVal)
+  }
+},
+  {
+    toJSON: {
+      getters: true
+    }
+  });
+
+
+
 //user schema with mongoose
 const ThoughtSchema = new Schema({
   thoughtText: {
@@ -22,7 +52,7 @@ const ThoughtSchema = new Schema({
       ref: 'User'
     }
   ],
-  reactions: [reactionSchema]
+  reactions: [ReactionSchema]
 },
   //tell schema it can use virtuals & getters
   {
