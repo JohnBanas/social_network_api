@@ -46,6 +46,14 @@ UserSchema.virtual('friendCount').get(function () {
   return this.friends.reduce((total, friend) => total + friend.replies.length + 1, 0);
 })
 
+//delete thoughts associated with user, if user is deleted
+//modified from stackoverflow question https://stackoverflow.com/questions/11904159/automatically-remove-referencing-objects-on-deletion-in-mongodb
+//from [robertfoenix](https://stackoverflow.com/users/8010396/robertfoenix) answer
+User.pre('deleteOne', function (next) {
+  return this.model('Thought').deleteMany({ username: this._id }, next);
+})
+
+
 //create the User model
 const User = model('User', UserSchema);
 
