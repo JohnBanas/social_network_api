@@ -17,7 +17,7 @@ const thoughtController = {
 
   //get a single thought by id
   getThoughtById({ params }, res) {
-    Thought.findOne({ _id: params.id })
+    Thought.findOne({ _id: params.thoughtId })
       .select('-__v')
       .then(dbThoughtData => {
         //if no thought found send 404
@@ -56,7 +56,7 @@ const thoughtController = {
 
   //update thought by id and validate
   updateThought({ params, body }, res) {
-    Thought.findOneAndUpdate({ _id: params.id }, body, { new: true, runValidators: true })
+    Thought.findOneAndUpdate({ _id: params.thoughtId }, body, { new: true, runValidators: true })
       .then(dbThoughtData => {
         if (!dbThoughtData) {
           res.status(404).json({ message: 'No thought found with this id!' });
@@ -68,8 +68,8 @@ const thoughtController = {
   },
 
   //delete thought
-  deleteThought({ params }, res) {
-    Thought.findOneAndDelete({ _id: params.id })
+  removeThought({ params }, res) {
+    Thought.findOneAndDelete({ _id: params.thoughtId })
       .then(dbThoughtData => {
         if (!dbThoughtData) {
           res.status(404).json({ message: 'No thought found with this id!' });

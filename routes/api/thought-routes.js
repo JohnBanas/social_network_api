@@ -6,7 +6,7 @@ const { getAllThoughts,
   updateThought,
   addReaction,
   removeReaction
-} = require('../../controllers/comment-controller');
+} = require('../../controllers/thought-controller');
 
 // /api/thoughts/
 router
@@ -16,8 +16,14 @@ router
 // /api/thoughts/<userId>
 router
   .route('/:userId')
-  .get(getThoughtById)
   .post(addThought);
+
+
+//get single thought by id
+router
+  .route('/:thoughtId')
+  .delete(removeThought)
+  .get(getThoughtById);
 
 // /api/thoughts/<userId>/<thoughtId>
 // You need two parameters to delete a thought because
@@ -26,7 +32,6 @@ router
 //from the user
 router
   .route('/:userId/:thoughtId')
-  .delete(removeThought)
   .put(updateThought);
 
 //reactions

@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose');
 //date format npm
 const { formatDate } = require('date-utils-2020');
+const { User } = require('./User');
 
 
 //reaction schema
@@ -46,12 +47,10 @@ const ThoughtSchema = new Schema({
     default: Date.now,
     get: (createdAtVal) => formatDate(createdAtVal, 'dd/MM/yyyy hh:mm')
   },
-  username: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'User'
-    }
-  ],
+  username: {
+    type: String,
+    required: true
+  },
   reactions: [ReactionSchema]
 },
   //tell schema it can use virtuals & getters
