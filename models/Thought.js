@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 //date format npm
 const { formatDate } = require('date-utils-2020');
 const { User } = require('./User');
@@ -6,7 +6,7 @@ const { User } = require('./User');
 
 //reaction schema
 const ReactionSchema = new Schema({
-  //set custom id to avoid confusion with parent id (comment _id)
+  //set custom id to avoid confusion with parent id (thought _id)
   reactionId: {
     type: Schema.Types.ObjectId,
     default: () => new Types.ObjectId()
@@ -47,9 +47,11 @@ const ThoughtSchema = new Schema({
     default: Date.now,
     get: (createdAtVal) => formatDate(createdAtVal, 'dd/MM/yyyy hh:mm')
   },
-  username: {
+  username:
+  {
     type: String,
-    required: true
+    required: true,
+    ref: 'User'
   },
   reactions: [ReactionSchema]
 },
@@ -65,7 +67,7 @@ const ThoughtSchema = new Schema({
 
 //get total amount of reactions on retrieval (virtual) 
 ThoughtSchema.virtual('reactionCount').get(function () {
-  return this.reactions.reduce((total, reaction) => total + reaction.replies.length + 1, 0);
+  return this.reactions.length;
 })
 
 //create the Thought model
