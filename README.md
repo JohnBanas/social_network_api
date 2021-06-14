@@ -177,7 +177,7 @@ URL: http://localhost:3001/api/thoughts/<:thoughtId>/reactions/<:reactionId>
 
 <h2 id="videoDemonstration">Video Demonstration 📹</h2>  
 
-[Live application walkthrough](#) 
+[Live application walkthrough](https://youtu.be/DxsKxKrwL6k) 
 
 <p>&nbsp</p>
 

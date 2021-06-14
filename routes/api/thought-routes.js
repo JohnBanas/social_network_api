@@ -18,11 +18,15 @@ router
   .route('/:userId')
   .post(addThought);
 
+//delete thought from user as well
+router
+  .route('/:thoughtId/:userId')
+  .delete(removeThought);
+
 
 //get single thought by id
 router
   .route('/:thoughtId')
-  .delete(removeThought)
   .get(getThoughtById)
   .put(updateThought);
 
