@@ -23,15 +23,7 @@ router
 router
   .route('/:thoughtId')
   .delete(removeThought)
-  .get(getThoughtById);
-
-// /api/thoughts/<userId>/<thoughtId>
-// You need two parameters to delete a thought because
-// you need the thought id, but you also need to know which user that
-// thought came from to update the association & delete the associated thought data
-//from the user
-router
-  .route('/:userId/:thoughtId')
+  .get(getThoughtById)
   .put(updateThought);
 
 //reactions
